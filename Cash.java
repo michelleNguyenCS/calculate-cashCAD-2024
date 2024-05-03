@@ -1,11 +1,18 @@
 /**
  * @author Michelle Nguyen
- * @since 2024-05-01
+ * @version 2024-05-02
  */
+
+
+// IMPORT CLASSES
+import java.math.BigDecimal;
+import java.util.TreeMap;
 
 
 public class Cash {
 	enum Type { HUNDRED, FIFTY, TWENTY, TEN, FIVE, TOONIE, LOONIE, QUARTER, DIME, NICKEL }
+	private static Type types[] = new Type[] {Type.HUNDRED, Type.FIFTY, Type.TWENTY, Type.TEN, Type.FIVE,
+			Type.TOONIE, Type.LOONIE, Type.QUARTER, Type.DIME, Type.NICKEL};
 	
 	public static String getCashType(Type type)
 	{
@@ -34,30 +41,54 @@ public class Cash {
 		return "invalid coin type"; // for bug-testing
 	}
 	
-	public static double getValue(Type type)
+	public static BigDecimal getValue(Type type)
 	{
 		switch (type) {
 			case HUNDRED: 
-				return 100.00;
+				// new BigDecimal(100.00) <-- do NOT use constructor using double, has problems with floating point rep
+				return BigDecimal.valueOf(100.00);
 			case FIFTY: 
-				return 50.00;
+				return BigDecimal.valueOf(50.00);
 			case TWENTY: 
-				return 20.00;
+				return BigDecimal.valueOf(20.00);
 			case TEN: 
-				return 10.00;
+				return BigDecimal.valueOf(10.00);
 			case FIVE: 
-				return 5.00;
+				return BigDecimal.valueOf(5.00);
 			case TOONIE: 
-				return 2.00;
+				return BigDecimal.valueOf(2.00);
 			case LOONIE: 
-				return 1.00;
+				return BigDecimal.valueOf(1.00);
 			case QUARTER: 
-				return 0.25;
+				return BigDecimal.valueOf(0.25);
 			case DIME: 
-				return 0.10;
+				return BigDecimal.valueOf(0.10);
 			case NICKEL: 
-				return 0.05;
+				return BigDecimal.valueOf(0.05);
 		}
-		return -1000000;	// incredibly negative for bug-testing
+		return new BigDecimal(-1000000);	// incredibly negative for bug-testing
+	}
+	
+	// Assumes that param p (payment) is rounded to nearest 5 or 0
+	// Assumes cash register has enough of every bill/coin required
+	public static TreeMap<Type, Integer> calculateChange(BigDecimal p)
+	{
+		BigDecimal payment = p;
+		TreeMap<Type, Integer> change = new TreeMap<>();
+		for (Type type : types) {
+			
+			BigDecimal value = getValue(type);
+			//System.out.println("VALUE: " + value);
+			
+			int n = 0;
+			while (payment.compareTo(value) >= 0.0) {
+				payment = payment.subtract(value);
+				//System.out.println("REMAINING: " + value + ", " + payment);
+				n++;
+			}
+			//System.out.println("NUMBER: " +  n + "\n");
+			change.put(type, n);
+		}
+		return change;
 	}
 }

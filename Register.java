@@ -1,10 +1,11 @@
 /**
  * @author Michelle Nguyen
- * @since 2024-05-01
+ * @version 2024-05-02
  */
 
 
 // IMPORT CLASSES
+import java.math.BigDecimal;
 import java.util.TreeMap;
 
 
@@ -36,17 +37,19 @@ public class Register {
 	
 	/* METHODS */
 	
-	public double getRegisterBalance()
+	public BigDecimal getRegisterBalance()
 	{
-		double value = 0.0;
-		
+		BigDecimal registerValue = BigDecimal.valueOf(0.0);
 		for (Cash.Type type : bills.keySet()) {
-			value += Cash.getValue(type) * bills.get(type);
+			BigDecimal cashValue = Cash.getValue(type);
+			registerValue = registerValue.add(cashValue.multiply(BigDecimal.valueOf(bills.get(type))));
+			
 		}
 		for (Cash.Type type : coins.keySet()) {
-			value += Cash.getValue(type) * coins.get(type);
+			BigDecimal cashValue = Cash.getValue(type);
+			registerValue = registerValue.add(cashValue.multiply(BigDecimal.valueOf(coins.get(type))));
 		}
-		return value;
+		return registerValue;
 	}
 	
 	/* OVERRIDE METHODS */
