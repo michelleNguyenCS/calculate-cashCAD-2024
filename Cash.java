@@ -1,6 +1,6 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-05-02
+ * @version 2024-05-03
  */
 
 
@@ -70,25 +70,33 @@ public class Cash {
 	}
 	
 	// Assumes that param p (payment) is rounded to nearest 5 or 0
-	// Assumes cash register has enough of every bill/coin required
-	public static TreeMap<Type, Integer> calculateChange(BigDecimal p)
+	public static TreeMap<Type, Integer> calculateChange(BigDecimal p, Register r)
 	{
 		BigDecimal payment = p;
+		
+		TreeMap<Type, Integer> register = new TreeMap<>();
+		register.putAll(r.getBills());
+		register.putAll(r.getCoins());
+
 		TreeMap<Type, Integer> change = new TreeMap<>();
 		for (Type type : types) {
-			
 			BigDecimal value = getValue(type);
 			//System.out.println("VALUE: " + value);
-			
+			 
 			int n = 0;
-			while (payment.compareTo(value) >= 0.0) {
+			while (payment.compareTo(value) >= 0.0 && register.get(type) > 0) {
 				payment = payment.subtract(value);
 				//System.out.println("REMAINING: " + value + ", " + payment);
 				n++;
+				register.put(type, register.get(type) - 1);
+				//System.out.println("NUMBER: " +  n + "\n");
 			}
-			//System.out.println("NUMBER: " +  n + "\n");
 			change.put(type, n);
 		}
+		if (payment.compareTo(BigDecimal.valueOf(0.0)) != 0)
+			System.out.println("Value was not reached " + payment + " remaining.");
+		else
+			System.out.println("Value was reached.");
 		return change;
 	}
 }

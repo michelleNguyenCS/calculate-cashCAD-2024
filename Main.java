@@ -3,7 +3,7 @@
  * amount of change to return to the customer.
  * 
  * @author Michelle Nguyen
- * @version 2024-05-02
+ * @version 2024-05-03
  */
 
 
@@ -27,14 +27,17 @@ public class Main {
 		
 		// TESTING SIMPLE CHANGE CALCULATION
 		
+		Register register = new Register(0, 0, 0, 0, 0, 0, 0, 3, 0, 2);
+		System.out.println(register + "\n");
+		
 		System.out.println("100.25");
-		System.out.println(Cash.calculateChange(BigDecimal.valueOf(100.25)));
+		System.out.println(Cash.calculateChange(BigDecimal.valueOf(100.25), register));
 		
 		System.out.println("\n0.80");
-		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.80)));
+		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.80), register));
 		
 		System.out.println("\n0.85");
-		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.85)));
+		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.85), register));
 		
 	}
 }

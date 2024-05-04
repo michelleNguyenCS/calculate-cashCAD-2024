@@ -1,6 +1,6 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-05-02
+ * @version 2024-05-03
  */
 
 
@@ -14,6 +14,9 @@ public class Register {
 	private TreeMap<Cash.Type, Integer> coins;
 	
 	/* CONSTRUCTOR */
+	/*
+	 * Might consider combining bills and coins into one map
+	 */
 	
 	public Register(int hundredCount, int fiftyCount, int twentyCount, int tenCount, int fiveCount,
 			int toonieCount, int loonieCount, int quarterCount, int dimeCount, int nickelCount) {
@@ -24,7 +27,7 @@ public class Register {
 		bills.put(Cash.Type.TWENTY, twentyCount);
 		bills.put(Cash.Type.TEN, tenCount);
 		bills.put(Cash.Type.FIVE, fiveCount);
-		System.out.println(bills);
+		//System.out.println(bills);
 		// ADDING COIN COUNT
 		coins = new TreeMap<>();
 		coins.put(Cash.Type.TOONIE, toonieCount);
@@ -32,7 +35,16 @@ public class Register {
 		coins.put(Cash.Type.QUARTER, quarterCount);
 		coins.put(Cash.Type.DIME, dimeCount);
 		coins.put(Cash.Type.NICKEL, nickelCount);
-		System.out.println(coins);
+		//System.out.println(coins);
+	}
+	
+	/* GET METHODS */
+	
+	public TreeMap<Cash.Type, Integer> getBills() {
+		return bills;
+	}
+	public TreeMap<Cash.Type, Integer> getCoins() {
+		return coins;
 	}
 	
 	/* METHODS */
