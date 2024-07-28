@@ -3,7 +3,7 @@
  * amount of change to return to the customer.
  * 
  * @author Michelle Nguyen
- * @version 2024-05-03
+ * @version 2024-07-27
  */
 
 
@@ -12,8 +12,14 @@
 import java.math.BigDecimal;
 
 
+/**
+ * Driver Class
+ */
 public class Main {
 
+	/**
+	 * Main Driver
+	 */
 	public static void main(String[] args) {
 		
 		// TESTING REGISTER VALUE COUNTING
@@ -26,7 +32,7 @@ public class Main {
 		*/
 		
 		// TESTING SIMPLE CHANGE CALCULATION
-		
+		/*
 		Register register = new Register(0, 0, 0, 0, 0, 0, 0, 3, 0, 2);
 		System.out.println(register + "\n");
 		
@@ -39,5 +45,38 @@ public class Main {
 		System.out.println("\n0.85");
 		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.85), register));
 		
+		System.out.println("\n0.90");
+		System.out.println(Cash.calculateChange(BigDecimal.valueOf(0.90), register));
+		*/
+		
+		// TESTING CASH ROUND 
+		/*
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.00)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.01)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.02)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.03)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.04)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.05)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.06)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.07)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.08)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.09)));
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(0.10)));
+		System.out.println();
+		System.out.println(Cash.roundCash(BigDecimal.valueOf(1.98)));
+		*/
+		
+		// TESTING REGISTER EQUALITY
+		
+		Register r1 = new Register(0, 0, 0, 3, 0, 0, 0, 0, 1, 2);
+		Register r2 = new Register(0, 0, 0, 3, 0, 0, 0, 0, 1, 2);
+		System.out.println(r1.equals(r2));
+		System.out.println(r1.getRegisterBalance());
+		System.out.println(r2.getRegisterBalance());
+		Register r3 = new Register(0, 0, 0, 0, 0, 0, 0, 0, 0, 2);
+		Register r4 = new Register(0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+		System.out.println(r3.equals(r4));
+		System.out.println(r3.getRegisterBalance());
+		System.out.println(r4.getRegisterBalance());
 	}
 }
