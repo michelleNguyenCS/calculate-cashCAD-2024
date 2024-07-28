@@ -3,12 +3,11 @@
  * amount of change to return to the customer.
  * 
  * @author Michelle Nguyen
- * @version 2024-07-27
+ * @version 2024-07-28
  */
 
 
 // IMPORT CLASSES
-//import java.util.Random;
 import java.math.BigDecimal;
 
 
@@ -67,7 +66,7 @@ public class Main {
 		*/
 		
 		// TESTING REGISTER EQUALITY
-		
+		/*
 		Register r1 = new Register(0, 0, 0, 3, 0, 0, 0, 0, 1, 2);
 		Register r2 = new Register(0, 0, 0, 3, 0, 0, 0, 0, 1, 2);
 		System.out.println(r1.equals(r2));
@@ -78,5 +77,22 @@ public class Main {
 		System.out.println(r3.equals(r4));
 		System.out.println(r3.getRegisterBalance());
 		System.out.println(r4.getRegisterBalance());
+		*/
+		
+		// TESTING RANDOM CASH VALUES
+		
+		BigDecimal c = Cash.randomCash();
+		System.out.println(c);
+		System.out.println(Cash.roundCash(c));
+		
+		// MAIN PROGRAM
+		/*
+		String choice = "";
+		while (!choice.equalsIgnoreCase("q"))
+		{
+			
+			
+		}
+		*/
 	}
 }

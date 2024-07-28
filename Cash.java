@@ -1,12 +1,13 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-07-27
+ * @version 2024-07-28
  */
 
 
 // IMPORT CLASSES
 import java.math.BigDecimal;
 import java.util.TreeMap;
+import java.util.Random;
 
 
 /**
@@ -95,6 +96,33 @@ public class Cash {
 	/* METHODS */
 	
 	/**
+	 * Generates a random money value
+	 * 
+	 * @return	a random money value
+	 */
+	public static BigDecimal randomCash()
+	{
+		// Range for dollars
+		int wholeMin = 1;
+		int wholeMax = 100;
+		
+		// Range for cents
+		int decimalMin = 1;
+		int decimalMax = 100;
+		
+		Random r = new Random();
+		
+		// https://www.geeksforgeeks.org/generating-random-numbers-in-java/
+		// Not sure why this formula works, problem for another day
+		int whole = r.nextInt((wholeMax - wholeMin + 1) + wholeMin);
+		double decimal = r.nextInt((decimalMax - decimalMin + 1) + decimalMin);
+		decimal /= 100;
+		//System.out.println(whole + " " + decimal);
+		
+		return BigDecimal.valueOf(whole + decimal);
+	}
+	
+	/**
 	 * Rounds a cash value to the nearest x.x5 or x.x0,
 	 * assumes the cash input is positive
 	 * 
@@ -108,7 +136,7 @@ public class Cash {
 		BigDecimal r = c.remainder(BigDecimal.valueOf(0.05));
 		
 		// bug-testing
-		System.out.println("original: " + c + "\t" + "remainder: " + r);
+		//System.out.println("original: " + c + "\t" + "remainder: " + r);
 		
 		// For some reason "BigDecimal.valueOf()" won't work properly
 		/*
