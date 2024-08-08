@@ -219,12 +219,14 @@ public class Cash {
 			}
 			change.put(type, n);
 		}
+		/*
 		// If the payment is not yet 0, then there is not enough cash types in the register
 		if (payment.compareTo(BigDecimal.valueOf(0.0)) != 0)
 			System.out.println("Value was not reached " + payment + " remaining.");
 		// If the payment is 0, then there is enough change in the register
 		else
 			System.out.println("Value was reached.");
+		*/
 		
 		// FOR THE GUI DRIVER
 		int hundred = change.get(Type.HUNDRED);

@@ -42,7 +42,7 @@ public class GUIDriver extends Application {
 		
 		// Total Line
 		
-		HBox totalHBox = new HBox();
+		HBox totalHBox = new HBox(10);
 		totalHBox.setAlignment(Pos.CENTER);
 		
 		Label feeLabel = new Label("Total:");
@@ -57,22 +57,22 @@ public class GUIDriver extends Application {
 		
 		HBox registerHBox = new HBox();
 		
-		VBox col1VBox = new VBox();	// $100 and $2
-		VBox col2VBox = new VBox();	// $50 and $1
-		VBox col3VBox = new VBox();	// $20 and 25 cents
-		VBox col4VBox = new VBox();	// $10 and 10 cents
-		VBox col5VBox = new VBox();	// $5 and 5 cents
+		VBox col1VBox = new VBox(10);	// $100 and $2
+		VBox col2VBox = new VBox(10);	// $50 and $1
+		VBox col3VBox = new VBox(10);	// $20 and 25 cents
+		VBox col4VBox = new VBox(10);	// $10 and 10 cents
+		VBox col5VBox = new VBox(10);	// $5 and 5 cents
 		
-		VBox hundredVBox = new VBox();
-		VBox fiftyVBox = new VBox();
-		VBox twentyVBox = new VBox();
-		VBox tenVBox = new VBox();
-		VBox fiveVBox = new VBox();
-		VBox toonieVBox = new VBox();
-		VBox loonieVBox = new VBox();
-		VBox quarterVBox = new VBox();
-		VBox dimeVBox = new VBox();
-		VBox nickelVBox = new VBox();
+		VBox hundredVBox = new VBox(5);
+		VBox fiftyVBox = new VBox(5);
+		VBox twentyVBox = new VBox(5);
+		VBox tenVBox = new VBox(5);
+		VBox fiveVBox = new VBox(5);
+		VBox toonieVBox = new VBox(5);
+		VBox loonieVBox = new VBox(5);
+		VBox quarterVBox = new VBox(5);
+		VBox dimeVBox = new VBox(5);
+		VBox nickelVBox = new VBox(5);
 		
 		// $100
 		
@@ -206,7 +206,7 @@ public class GUIDriver extends Application {
 		
 		// Buttons
 		
-		HBox buttonHBox = new HBox();
+		HBox buttonHBox = new HBox(10);
 		buttonHBox.setAlignment(Pos.CENTER);
 		
 		Button generateButton= new Button("Generate");
@@ -237,6 +237,10 @@ public class GUIDriver extends Application {
 				BigDecimal payment = BigDecimal.valueOf(0.00);	// Initialize variable
 				payment = Cash.roundCash(Cash.randomCash());	// Generate payment
 				feeText.setText(payment.toString());			// Display payment
+				
+				// Reset Result Label
+				
+				resultLabel.setText("...");
 				
 				// Auto-set 0
 				
