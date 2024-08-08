@@ -1,10 +1,11 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-08-06
+ * @version 2024-08-07
  */
 
 
 /* IMPORT STATEMENTS */
+import java.math.BigDecimal;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,14 +29,14 @@ public class GUIDriver extends Application {
 		Font f1 = new Font("Arial", 24);
 		
 		/* INITIAL FRAME */
-		VBox vbox = new VBox();
+		VBox vbox = new VBox(20);
 		vbox.setAlignment(Pos.CENTER);
 		
 		/* GUI SETUP */
 		Scene scene = new Scene(vbox, 600, 800);
 		stage.setScene(scene);
 		stage.setTitle("Cashier Simulator");
-		stage.show();							// Required for Interface to Launch (1/2)
+		stage.show();		// Required for Interface to Launch (1/2)
 		
 		/* CASH REGISTER */
 		
@@ -219,17 +220,72 @@ public class GUIDriver extends Application {
 		
 		buttonHBox.getChildren().addAll(generateButton, submitButton);
 		
+		// Result Text
+		
+		Label resultLabel = new Label("...");
+		resultLabel.setAlignment(Pos.CENTER);
+		resultLabel.setFont(f1);
+		
 		// Adding It All Together (2)
 		
-		vbox.getChildren().addAll(totalHBox, registerHBox, buttonHBox);
+		vbox.getChildren().addAll(totalHBox, registerHBox, buttonHBox, resultLabel);
 		
-		/* PROGRAM CODE */
+		/* BUTTON CODE */
 		
 		generateButton.setOnAction(e -> {
-			feeText.setText(Cash.roundCash(Cash.randomCash()).toString());
-		});
-		
-		
+			try {
+				BigDecimal payment = BigDecimal.valueOf(0.00);	// Initialize variable
+				payment = Cash.roundCash(Cash.randomCash());	// Generate payment
+				feeText.setText(payment.toString());			// Display payment
+				
+				// Auto-set 0
+				
+				hundredField.setText("0");
+				fiftyField.setText("0");
+				twentyField.setText("0");
+				tenField.setText("0");
+				fiveField.setText("0");
+				
+				toonieField.setText("0");
+				loonieField.setText("0");
+				quarterField.setText("0");
+				dimeField.setText("0");
+				nickelField.setText("0");
+				
+				// Random Cash Register
+				Register register = new Register (10, 10, 10, 10, 10, 10, 10, 10, 10, 10);
+				
+				// Getting the Correct Answer
+				Register correctAnswer = Cash.calculateChange(payment, register);
+				
+				submitButton.setOnAction(f -> {
+					try {
+						
+						// Getting Player's Guess
+						
+						int playerHundred = Integer.valueOf(hundredField.getText());
+						int playerFifty = Integer.valueOf(fiftyField.getText());
+						int playerTwenty = Integer.valueOf(twentyField.getText());
+						int playerTen = Integer.valueOf(tenField.getText());
+						int playerFive = Integer.valueOf(fiveField.getText());
+						
+						int playerToonie = Integer.valueOf(toonieField.getText());
+						int playerLoonie = Integer.valueOf(loonieField.getText());
+						int playerQuarter = Integer.valueOf(quarterField.getText());
+						int playerDime = Integer.valueOf(dimeField.getText());
+						int playerNickel = Integer.valueOf(nickelField.getText());
+						
+						Register playerGuess = new Register(playerHundred, playerFifty, playerTwenty, 
+								playerTen, playerFive, playerToonie, playerLoonie, playerQuarter, 
+								playerDime, playerNickel);
+						
+						if (playerGuess.equals(correctAnswer))
+							resultLabel.setText("nice job");
+						else
+							resultLabel.setText("bad math");
+					} catch (Exception g) {}
+				});
+			} catch (Exception error) {} });
 	}
 	
 	public static void main(String[] args) {

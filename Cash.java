@@ -1,11 +1,12 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-07-28
+ * @version 2024-08-07
  */
 
 
 // IMPORT CLASSES
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.TreeMap;
 import java.util.Random;
 
@@ -118,8 +119,8 @@ public class Cash {
 		double decimal = r.nextInt((decimalMax - decimalMin + 1) + decimalMin);
 		decimal /= 100;
 		//System.out.println(whole + " " + decimal);
-		
-		return BigDecimal.valueOf(whole + decimal);
+
+		return BigDecimal.valueOf(whole + decimal).setScale(2, RoundingMode.HALF_UP);
 	}
 	
 	/**
@@ -186,7 +187,8 @@ public class Cash {
 	 * @param r	The contents of the cash register
 	 * @return	The best change to return based on the contents of the register
 	 */
-	public static TreeMap<Type, Integer> calculateChange(BigDecimal p, Register r)
+	// TreeMap<Type, Integer> (original return)
+	public static Register calculateChange(BigDecimal p, Register r)
 	{
 		// The payment the customer makes to the cashier
 		BigDecimal payment = p;
@@ -223,6 +225,22 @@ public class Cash {
 		// If the payment is 0, then there is enough change in the register
 		else
 			System.out.println("Value was reached.");
-		return change;
+		
+		// FOR THE GUI DRIVER
+		int hundred = change.get(Type.HUNDRED);
+		int fifty = change.get(Type.FIFTY);
+		int twenty = change.get(Type.TWENTY);
+		int ten = change.get(Type.TEN);
+		int five = change.get(Type.FIVE);
+		int toonie = change.get(Type.TOONIE);
+		int loonie = change.get(Type.LOONIE);
+		int quarter = change.get(Type.QUARTER);
+		int dime = change.get(Type.DIME);
+		int nickel = change.get(Type.NICKEL);
+		
+		Register answer = new Register(hundred, fifty, twenty, ten, five, 
+				toonie, loonie, quarter, dime, nickel);
+		
+		return answer;
 	}
 }
