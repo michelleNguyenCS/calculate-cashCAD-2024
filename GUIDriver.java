@@ -1,6 +1,6 @@
 /**
  * @author Michelle Nguyen
- * @version 2024-08-07
+ * @version 2024-12-14
  */
 
 
@@ -35,7 +35,7 @@ public class GUIDriver extends Application {
 		/* GUI SETUP */
 		Scene scene = new Scene(vbox, 600, 800);
 		stage.setScene(scene);
-		stage.setTitle("Cashier Simulator");
+		stage.setTitle("Calculate Cash");
 		stage.show();		// Required for Interface to Launch (1/2)
 		
 		/* CASH REGISTER */
@@ -284,9 +284,9 @@ public class GUIDriver extends Application {
 								playerDime, playerNickel);
 						
 						if (playerGuess.equals(correctAnswer))
-							resultLabel.setText("nice job");
+							resultLabel.setText("Nice job!");
 						else
-							resultLabel.setText("bad math");
+							resultLabel.setText("Try again!");
 					} catch (Exception g) {}
 				});
 			} catch (Exception error) {} });
